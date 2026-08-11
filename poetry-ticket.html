@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Poetry Night 2026 - Kelvin Event Hub
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- ========================= -->
+<!-- HEADER -->
+<!-- ========================= -->
+
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            KELVIN <span>EVENT HUB</span>
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="events.html">
+                Events
+            </a>
+
+            <a href="organizer.html">
+                Host an Event
+            </a>
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="about.html">
+                About
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- ========================= -->
+<!-- TICKET PAGE -->
+<!-- ========================= -->
+
+<main class="ticket-page">
+
+
+    <!-- PAGE HEADING -->
+
+    <div class="ticket-heading">
+
+        <p>
+            EVENT TICKET
+        </p>
+
+
+        <h1>
+            Poetry Night 2026
+        </h1>
+
+
+        <span>
+            An evening of poetry, literature and creative expression.
+        </span>
+
+    </div>
+
+
+
+    <!-- ========================= -->
+    <!-- TICKET FORM -->
+    <!-- ========================= -->
+
+    <form
+        class="ticket-form"
+        id="ticketForm"
+    >
+
+
+        <h2>
+            Attendee Information
+        </h2>
+
+
+        <!-- FULL NAME -->
+
+        <div class="form-group">
+
+            <label for="name">
+                Full Name
+            </label>
+
+            <input
+                type="text"
+                id="name"
+                name="name"
+                placeholder="Enter your full name"
+                required
+            >
+
+        </div>
+
+
+
+        <!-- EMAIL -->
+
+        <div class="form-group">
+
+            <label for="email">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Enter your email address"
+                required
+            >
+
+        </div>
+
+
+
+        <!-- PHONE -->
+
+        <div class="form-group">
+
+            <label for="phone">
+                Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="08012345678"
+                required
+            >
+
+        </div>
+
+
+
+        <!-- NUMBER OF TICKETS -->
+
+        <div class="form-group">
+
+            <label for="tickets">
+                Number of Tickets
+            </label>
+
+            <select
+                id="tickets"
+                name="tickets"
+                required
+            >
+
+                <option value="">
+                    Select number of tickets
+                </option>
+
+                <option value="1">
+                    1 Ticket
+                </option>
+
+                <option value="2">
+                    2 Tickets
+                </option>
+
+                <option value="3">
+                    3 Tickets
+                </option>
+
+                <option value="4">
+                    4 Tickets
+                </option>
+
+                <option value="5">
+                    5 Tickets
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- EVENT SUMMARY -->
+        <!-- ========================= -->
+
+        <div class="ticket-summary">
+
+            <h3>
+                Poetry Night 2026
+            </h3>
+
+
+            <p>
+                📍 Yenagoa
+            </p>
+
+
+            <p>
+                📅 September 20, 2026
+            </p>
+
+
+            <p>
+                🕐 5:00 PM
+            </p>
+
+
+            <strong>
+                🎟️ Ticket: ₦2,000
+            </strong>
+
+        </div>
+
+
+
+        <!-- ========================= -->
+        <!-- PAYMENT BUTTON -->
+        <!-- ========================= -->
+
+        <button
+            type="submit"
+            class="btn primary registration-button"
+        >
+
+            Continue to Payment
+
+        </button>
+
+
+    </form>
+
+
+</main>
+
+
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<footer>
+
+    <h3>
+        KELVIN EVENT HUB
+    </h3>
+
+
+    <p>
+        Discover. Create. Connect.
+    </p>
+
+
+    <p>
+        📞 08166845444
+    </p>
+
+
+    <p>
+        📧 akpofaghaikiemoye0@gmail.com
+    </p>
+
+
+    <p>
+        © 2026 Kelvin Event Hub
+    </p>
+
+</footer>
+
+
+
+<!-- ========================= -->
+<!-- SAVE INFORMATION -->
+<!-- ========================= -->
+
+<script>
+
+document
+    .getElementById("ticketForm")
+    .addEventListener("submit", function(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document
+                .getElementById("name")
+                .value
+                .trim();
+
+
+        const email =
+            document
+                .getElementById("email")
+                .value
+                .trim();
+
+
+        const phone =
+            document
+                .getElementById("phone")
+                .value
+                .trim();
+
+
+        const tickets =
+            document
+                .getElementById("tickets")
+                .value;
+
+
+        if (
+            !name ||
+            !email ||
+            !phone ||
+            !tickets
+        ) {
+
+            alert(
+                "Please complete all the required fields."
+            );
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            "attendeeName",
+            name
+        );
+
+
+        localStorage.setItem(
+            "attendeeEmail",
+            email
+        );
+
+
+        localStorage.setItem(
+            "attendeePhone",
+            phone
+        );
+
+
+        localStorage.setItem(
+            "ticketQuantity",
+            tickets
+        );
+
+
+        /*
+         * SEND CUSTOMER TO PAYMENT PAGE
+         */
+
+        window.location.href =
+            "payment.html";
+
+    });
+
+</script>
+
+
+</body>
+
+</html>

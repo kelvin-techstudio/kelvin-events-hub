@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Payment - Kelvin Event Hub
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <!-- PAYSTACK INLINE JS V2 -->
+    <script
+        src="https://js.paystack.co/v2/inline.js">
+    </script>
+
+
+    <style>
+
+        /* =========================
+           PAYMENT PAGE
+        ========================= */
+
+        .payment-page {
+            padding: 40px 15px;
+            min-height: 70vh;
+        }
+
+
+        .payment-container {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+
+        .payment-heading {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+
+        .payment-heading p {
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+
+        .payment-heading h1 {
+            margin: 0 0 10px;
+        }
+
+
+        .payment-heading span {
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           PAYMENT CARD
+        ========================= */
+
+        .payment-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.10);
+        }
+
+
+        .payment-card h2 {
+            margin-top: 0;
+            margin-bottom: 25px;
+        }
+
+
+        /* =========================
+           EVENT DETAILS
+        ========================= */
+
+        .payment-event {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+
+        .payment-event div {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+
+        .payment-event strong {
+            min-width: 110px;
+        }
+
+
+        .payment-event span {
+            text-align: right;
+        }
+
+
+        /* =========================
+           TOTAL
+        ========================= */
+
+        .payment-total {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f7f7f7;
+            border-radius: 10px;
+        }
+
+
+        .payment-total > div {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+
+        .payment-total .total-row {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #dddddd;
+            font-size: 20px;
+        }
+
+
+        /* =========================
+           PAYMENT NOTICE
+        ========================= */
+
+        .payment-notice {
+            margin-top: 25px;
+            padding: 18px;
+            background: #fff8e8;
+            border-radius: 10px;
+            line-height: 1.6;
+        }
+
+
+        .payment-notice strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+
+        .payment-notice p {
+            margin: 0;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .payment-button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+
+        .payment-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+
+        /* =========================
+           BACK LINK
+        ========================= */
+
+        .payment-back {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            .payment-page {
+                padding: 30px 12px;
+            }
+
+
+            .payment-card {
+                padding: 20px;
+            }
+
+
+            .payment-heading h1 {
+                font-size: 30px;
+            }
+
+
+            .payment-event div {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+
+            .payment-event span {
+                text-align: left;
+            }
+
+
+            .payment-total > div {
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            KELVIN <span>EVENT HUB</span>
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+
+            <a href="events.html">
+                Events
+            </a>
+
+
+            <a href="about.html">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+
+<!-- =========================
+     PAYMENT PAGE
+========================= -->
+
+<main class="payment-page">
+
+    <div class="payment-container">
+
+
+        <!-- HEADING -->
+
+        <div class="payment-heading">
+
+            <p>
+                SECURE CHECKOUT
+            </p>
+
+
+            <h1>
+                Complete Your Payment
+            </h1>
+
+
+            <span>
+                Poetry Night 2026
+            </span>
+
+        </div>
+
+
+
+        <!-- PAYMENT CARD -->
+
+        <div class="payment-card">
+
+
+            <h2>
+                Order Summary
+            </h2>
+
+
+
+            <!-- EVENT INFORMATION -->
+
+            <div class="payment-event">
+
+
+                <div>
+
+                    <strong>
+                        Event
+                    </strong>
+
+                    <span>
+                        Poetry Night 2026
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Date
+                    </strong>
+
+                    <span>
+                        September 20, 2026
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Time
+                    </strong>
+
+                    <span>
+                        5:00 PM
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Location
+                    </strong>
+
+                    <span>
+                        Yenagoa
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PRICE -->
+
+            <div class="payment-total">
+
+
+                <div>
+
+                    <span>
+                        Ticket Price
+                    </span>
+
+                    <strong>
+                        ₦2,000
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Number of Tickets
+                    </span>
+
+                    <strong id="ticketQuantity">
+                        1
+                    </strong>
+
+                </div>
+
+
+                <div class="total-row">
+
+                    <span>
+                        Total Amount
+                    </span>
+
+                    <strong id="totalAmount">
+                        ₦2,000
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PAYMENT INFORMATION -->
+
+            <div class="payment-notice">
+
+                <strong>
+                    Payment Information
+                </strong>
+
+
+                <p>
+                    Your payment will be processed securely
+                    through Paystack. After successful payment,
+                    you will be taken to your ticket page.
+                </p>
+
+            </div>
+
+
+
+            <!-- =========================
+                 PAYSTACK BUTTON
+            ========================= -->
+
+            <button
+                type="button"
+                id="paymentButton"
+                class="btn primary payment-button"
+            >
+
+                Continue to Payment
+
+            </button>
+
+
+
+            <!-- BACK -->
+
+            <a
+                href="poetry-ticket.html"
+                class="back-link payment-back"
+            >
+
+                ← Back to Ticket Registration
+
+            </a>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <h3>
+        KELVIN EVENT HUB
+    </h3>
+
+
+    <p>
+        Discover. Create. Connect.
+    </p>
+
+
+    <p>
+        📞 08166845444
+    </p>
+
+
+    <p>
+        📧 akpofaghaikiemoye0@gmail.com
+    </p>
+
+
+    <p>
+        © 2026 Kelvin Event Hub
+    </p>
+
+</footer>
+
+
+
+<!-- =========================
+     PAYSTACK PAYMENT SCRIPT
+========================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* =========================
+           GET SAVED CUSTOMER DATA
+        ========================= */
+
+        const customerEmail =
+            localStorage.getItem(
+                "attendeeEmail"
+            );
+
+
+        const customerName =
+            localStorage.getItem(
+                "attendeeName"
+            );
+
+
+        const customerPhone =
+            localStorage.getItem(
+                "attendeePhone"
+            );
+
+
+        const quantity =
+            parseInt(
+                localStorage.getItem(
+                    "ticketQuantity"
+                )
+            ) || 1;
+
+
+        /* =========================
+           TICKET PRICE
+        ========================= */
+
+        const ticketPrice = 2000;
+
+
+        const total =
+            quantity * ticketPrice;
+
+
+        /* =========================
+           UPDATE PAGE
+        ========================= */
+
+        const quantityElement =
+            document.getElementById(
+                "ticketQuantity"
+            );
+
+
+        const totalElement =
+            document.getElementById(
+                "totalAmount"
+            );
+
+
+        if (quantityElement) {
+
+            quantityElement.textContent =
+                quantity;
+
+        }
+
+
+        if (totalElement) {
+
+            totalElement.textContent =
+                "₦" +
+                total.toLocaleString();
+
+        }
+
+
+        /* Save total */
+
+        localStorage.setItem(
+            "ticketTotal",
+            total
+        );
+
+
+
+        /* =========================
+           PAYMENT BUTTON
+        ========================= */
+
+        const paymentButton =
+            document.getElementById(
+                "paymentButton"
+            );
+
+
+        if (!paymentButton) {
+
+            return;
+
+        }
+
+
+
+        paymentButton.addEventListener(
+            "click",
+            function () {
+
+
+                /* =========================
+                   CHECK EMAIL
+                ========================= */
+
+                if (!customerEmail) {
+
+                    alert(
+                        "Customer email was not found. Please go back and complete the registration again."
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* =========================
+                   CHECK PAYSTACK
+                ========================= */
+
+                if (
+                    typeof PaystackPop ===
+                    "undefined"
+                ) {
+
+                    alert(
+                        "Paystack could not load. Please check your internet connection and try again."
+                    );
+
+                    return;
+
+                }
+
+
+
+                /* =========================
+                   DISABLE BUTTON
+                ========================= */
+
+                paymentButton.disabled =
+                    true;
+
+
+                paymentButton.textContent =
+                    "Opening Paystack...";
+
+
+
+                /* =========================
+                   CREATE PAYSTACK
+                   CHECKOUT
+                ========================= */
+
+                try {
+
+
+                    const paystack =
+                        new PaystackPop();
+
+
+                    paystack.newTransaction({
+
+                        /* YOUR TEST PUBLIC KEY */
+
+                        key:
+                            "pk_test_aa3e18ff2edccaac665bc985ba6e5319d81604a4",
+
+
+                        /* CUSTOMER EMAIL */
+
+                        email:
+                            customerEmail,
+
+
+                        /* AMOUNT IN KOBO */
+
+                        amount:
+                            total * 100,
+
+
+                        /* NIGERIAN NAIRA */
+
+                        currency:
+                            "NGN",
+
+
+                        /* CUSTOMER NAME */
+
+                        firstName:
+                            customerName || "",
+
+
+                        /* CUSTOMER PHONE */
+
+                        phone:
+                            customerPhone || "",
+
+
+                        /* EXTRA INFORMATION */
+
+                        metadata: {
+
+                            event:
+                                "Poetry Night 2026",
+
+                            attendee:
+                                customerName || "",
+
+                            ticketQuantity:
+                                quantity
+
+                        },
+
+
+                        /* =========================
+                           PAYMENT SUCCESS
+                        ========================= */
+
+                        onSuccess:
+                            function(transaction) {
+
+
+                                console.log(
+                                    "Payment successful:",
+                                    transaction
+                                );
+
+
+                                /* Save payment details */
+
+                                localStorage.setItem(
+                                    "paymentStatus",
+                                    "paid"
+                                );
+
+
+                                localStorage.setItem(
+                                    "paymentReference",
+                                    transaction.reference || ""
+                                );
+
+
+                                localStorage.setItem(
+                                    "paymentTransaction",
+                                    transaction.transaction || ""
+                                );
+
+
+                                /* =========================
+                                   GO TO TICKET
+                                ========================= */
+
+                                window.location.href =
+                                    "confirmation.html";
+
+                            },
+
+
+                        /* =========================
+                           PAYMENT CANCELLED
+                        ========================= */
+
+                        onCancel:
+                            function() {
+
+
+                                paymentButton.disabled =
+                                    false;
+
+
+                                paymentButton.textContent =
+                                    "Continue to Payment";
+
+
+                                alert(
+                                    "Payment was cancelled. Your ticket has not been generated."
+                                );
+
+                            },
+
+
+                        /* =========================
+                           PAYMENT ERROR
+                        ========================= */
+
+                        onError:
+                            function(error) {
+
+
+                                console.error(
+                                    "Paystack error:",
+                                    error
+                                );
+
+
+                                paymentButton.disabled =
+                                    false;
+
+
+                                paymentButton.textContent =
+                                    "Continue to Payment";
+
+
+                                alert(
+                                    "Paystack could not start the payment. Please try again."
+                                );
+
+                            }
+
+                    });
+
+
+                }
+
+
+                catch(error) {
+
+
+                    console.error(
+                        "Payment error:",
+                        error
+                    );
+
+
+                    paymentButton.disabled =
+                        false;
+
+
+                    paymentButton.textContent =
+                        "Continue to Payment";
+
+
+                    alert(
+                        "There was a problem opening Paystack. Please try again."
+                    );
+
+                }
+
+            }
+
+        );
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>

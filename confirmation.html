@@ -1,0 +1,667 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Ticket Confirmation - Kelvin Event Hub
+</title>
+
+<link
+    rel="stylesheet"
+    href="css/style.css"
+>
+
+<script
+    src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
+</script>
+
+</head><body><header><nav class="navbar">
+
+    <div class="logo">
+        KELVIN <span>EVENT HUB</span>
+    </div>
+
+
+    <div class="nav-links">
+
+        <a href="index.html">Home</a>
+
+        <a href="events.html">Events</a>
+
+        <a href="about.html">About</a>
+
+    </div>
+
+</nav>
+
+</header><main class="confirmation-page"><div class="confirmation-box">
+
+
+    <div class="success-icon">
+        ✓
+    </div>
+
+
+    <p class="confirmation-label">
+        REGISTRATION SUCCESSFUL
+    </p>
+
+
+    <h1>
+        Your Ticket is Ready
+    </h1>
+
+
+    <p class="confirmation-message">
+
+        Thank you for registering with Kelvin Event Hub.
+        Keep your ticket information safe.
+
+    </p>
+
+
+
+    <!-- TICKET -->
+
+    <div
+        class="ticket-card"
+        id="ticket"
+    >
+
+
+        <div class="ticket-card-header">
+
+            <h2>
+                KELVIN EVENT HUB
+            </h2>
+
+            <span>
+                EVENT TICKET
+            </span>
+
+        </div>
+
+
+
+        <div class="ticket-card-body">
+
+
+            <img
+                id="ticketEventImage"
+                src="images/1.jpeg"
+                alt="Poetry Night 2026"
+                class="ticket-event-image"
+                crossorigin="anonymous"
+            >
+
+
+            <h3>
+                Poetry Night 2026
+            </h3>
+
+
+
+            <div class="ticket-info">
+
+
+                <div>
+
+                    <strong>
+                        Attendee
+                    </strong>
+
+                    <span id="attendeeName">
+                        Guest
+                    </span>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        Email
+                    </strong>
+
+                    <span id="attendeeEmail">
+                        —
+                    </span>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        Phone
+                    </strong>
+
+                    <span id="attendeePhone">
+                        —
+                    </span>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        Date
+                    </strong>
+
+                    <span>
+                        September 20, 2026
+                    </span>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        Time
+                    </strong>
+
+                    <span>
+                        5:00 PM
+                    </span>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        Location
+                    </strong>
+
+                    <span>
+                        Yenagoa
+                    </span>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        Number of Tickets
+                    </strong>
+
+                    <span id="ticketQuantity">
+                        1
+                    </span>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        Total Amount
+                    </strong>
+
+                    <span id="ticketTotal">
+                        ₦2,000
+                    </span>
+
+                </div>
+
+
+
+                <div>
+
+                    <strong>
+                        Ticket ID
+                    </strong>
+
+                    <span id="ticketId">
+                        KEH-000001
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="ticket-card-footer">
+
+            <p>
+                Please present this ticket at the event.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- BUTTONS -->
+
+    <div class="confirmation-actions">
+
+
+        <button
+            type="button"
+            id="downloadButton"
+            onclick="downloadTicketImage()"
+            class="btn primary"
+        >
+
+            📥 Download Ticket Image
+
+        </button>
+
+
+
+        <button
+            type="button"
+            onclick="window.print()"
+            class="btn secondary"
+        >
+
+            🖨️ Print Ticket
+
+        </button>
+
+
+
+        <a
+            href="events.html"
+            class="back-link"
+        >
+
+            ← Browse More Events
+
+        </a>
+
+
+    </div>
+
+
+</div>
+
+</main><footer><h3>
+    KELVIN EVENT HUB
+</h3>
+
+
+<p>
+    Discover. Create. Connect.
+</p>
+
+
+<p>
+    📞 08166845444
+</p>
+
+
+<p>
+    📧 akpofaghaikiemoye0@gmail.com
+</p>
+
+
+<p>
+    © 2026 Kelvin Event Hub
+</p>
+
+</footer><script>
+
+
+/* ==================================
+   LOAD ATTENDEE INFORMATION
+================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const name =
+            localStorage.getItem(
+                "attendeeName"
+            ) || "Guest";
+
+
+        const email =
+            localStorage.getItem(
+                "attendeeEmail"
+            ) || "—";
+
+
+        const phone =
+            localStorage.getItem(
+                "attendeePhone"
+            ) || "—";
+
+
+        const quantity =
+            parseInt(
+                localStorage.getItem(
+                    "ticketQuantity"
+                )
+            ) || 1;
+
+
+        const price =
+            2000;
+
+
+        const total =
+            quantity * price;
+
+
+
+        document.getElementById(
+            "attendeeName"
+        ).textContent = name;
+
+
+        document.getElementById(
+            "attendeeEmail"
+        ).textContent = email;
+
+
+        document.getElementById(
+            "attendeePhone"
+        ).textContent = phone;
+
+
+        document.getElementById(
+            "ticketQuantity"
+        ).textContent = quantity;
+
+
+        document.getElementById(
+            "ticketTotal"
+        ).textContent =
+            "₦" + total.toLocaleString();
+
+
+
+        /* Generate ticket ID */
+
+        let ticketId =
+            localStorage.getItem(
+                "ticketId"
+            );
+
+
+        if (!ticketId) {
+
+            const randomNumber =
+                Math.floor(
+                    100000 +
+                    Math.random() * 900000
+                );
+
+
+            ticketId =
+                "KEH-" +
+                randomNumber;
+
+
+            localStorage.setItem(
+                "ticketId",
+                ticketId
+            );
+
+        }
+
+
+        document.getElementById(
+            "ticketId"
+        ).textContent =
+            ticketId;
+
+    }
+
+);
+
+
+
+/* ==================================
+   DOWNLOAD TICKET IMAGE
+================================== */
+
+async function downloadTicketImage() {
+
+
+    const ticket =
+        document.getElementById(
+            "ticket"
+        );
+
+
+    const button =
+        document.getElementById(
+            "downloadButton"
+        );
+
+
+    if (!ticket) {
+
+        alert(
+            "Ticket could not be found."
+        );
+
+        return;
+
+    }
+
+
+    if (
+        typeof html2canvas ===
+        "undefined"
+    ) {
+
+        alert(
+            "The ticket image tool has not loaded yet. Please check your internet connection and try again."
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+
+        button.disabled = true;
+
+
+        button.textContent =
+            "⏳ Preparing Ticket...";
+
+
+
+        const image =
+            document.getElementById(
+                "ticketEventImage"
+            );
+
+
+        if (image) {
+
+
+            if (!image.complete) {
+
+                await new Promise(
+                    function (
+                        resolve,
+                        reject
+                    ) {
+
+                        image.onload =
+                            resolve;
+
+                        image.onerror =
+                            reject;
+
+                    }
+                );
+
+            }
+
+        }
+
+
+
+        await new Promise(
+            function (resolve) {
+
+                setTimeout(
+                    resolve,
+                    300
+                );
+
+            }
+        );
+
+
+
+        const canvas =
+            await html2canvas(
+                ticket,
+                {
+
+                    backgroundColor:
+                        "#ffffff",
+
+                    scale: 2,
+
+                    useCORS: true,
+
+                    allowTaint: false,
+
+                    logging: false
+
+                }
+            );
+
+
+
+        canvas.toBlob(
+            function (blob) {
+
+
+                if (!blob) {
+
+                    alert(
+                        "Could not create ticket image."
+                    );
+
+                    button.disabled =
+                        false;
+
+                    button.textContent =
+                        "📥 Download Ticket Image";
+
+                    return;
+
+                }
+
+
+                const url =
+                    URL.createObjectURL(
+                        blob
+                    );
+
+
+                const link =
+                    document.createElement(
+                        "a"
+                    );
+
+
+                link.href =
+                    url;
+
+
+                link.download =
+                    "Kelvin-Event-Hub-Ticket.png";
+
+
+                document.body.appendChild(
+                    link
+                );
+
+
+                link.click();
+
+
+                document.body.removeChild(
+                    link
+                );
+
+
+                setTimeout(
+                    function () {
+
+                        URL.revokeObjectURL(
+                            url
+                        );
+
+                    },
+                    1000
+                );
+
+
+                button.disabled =
+                    false;
+
+
+                button.textContent =
+                    "📥 Download Ticket Image";
+
+
+            },
+            "image/png"
+        );
+
+
+    }
+
+
+    catch (error) {
+
+
+        console.error(
+            "Ticket download error:",
+            error
+        );
+
+
+        button.disabled =
+            false;
+
+
+        button.textContent =
+            "📥 Download Ticket Image";
+
+
+        alert(
+            "The ticket could not be downloaded. Please try again."
+        );
+
+    }
+
+}
+
+</script></body></html>
