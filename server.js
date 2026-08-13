@@ -287,6 +287,244 @@ app.post(
 
 
 /* =========================
+   VERIFY PAYSTACK PAYMENT
+========================= */
+
+app.get(
+    "/api/verify-payment/:reference",
+    async (req, res) => {
+
+        try {
+
+            /* -------------------------
+               CHECK SECRET KEY
+            ------------------------- */
+
+            if (!PAYSTACK_SECRET_KEY) {
+
+                return res.status(500).json({
+
+                    success: false,
+
+                    paid: false,
+
+                    message:
+                        "Paystack secret key is not configured on the server."
+
+                });
+
+            }
+
+
+            /* -------------------------
+               GET PAYMENT REFERENCE
+            ------------------------- */
+
+            const reference =
+                req.params.reference;
+
+
+            if (!reference) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    paid: false,
+
+                    message:
+                        "Payment reference is required."
+
+                });
+
+            }
+
+
+            /* -------------------------
+               VERIFY WITH PAYSTACK
+            ------------------------- */
+
+            const response =
+                await fetch(
+                    `https://api.paystack.co/transaction/verify/${encodeURIComponent(reference)}`,
+                    {
+
+                        method:
+                            "GET",
+
+                        headers: {
+
+                            Authorization:
+                                `Bearer ${PAYSTACK_SECRET_KEY}`,
+
+                            "Content-Type":
+                                "application/json"
+
+                        }
+
+                    }
+                );
+
+
+            /* -------------------------
+               READ PAYSTACK RESPONSE
+            ------------------------- */
+
+            const data =
+                await response.json();
+
+
+            /* -------------------------
+               CHECK PAYSTACK RESPONSE
+            ------------------------- */
+
+            if (
+                !response.ok ||
+                !data.status
+            ) {
+
+                console.error(
+                    "Paystack verification error:",
+                    data
+                );
+
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    paid: false,
+
+                    message:
+                        data.message ||
+                        "Unable to verify payment."
+
+                });
+
+            }
+
+
+            /* -------------------------
+               GET TRANSACTION
+            ------------------------- */
+
+            const transaction =
+                data.data;
+
+
+            /* -------------------------
+               CHECK PAYMENT STATUS
+            ------------------------- */
+
+            if (
+                transaction.status !==
+                "success"
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    paid: false,
+
+                    status:
+                        transaction.status,
+
+                    message:
+                        "Payment has not been completed successfully."
+
+                });
+
+            }
+
+
+            /* -------------------------
+               CHECK CURRENCY
+            ------------------------- */
+
+            if (
+                transaction.currency !==
+                "NGN"
+            ) {
+
+                return res.status(400).json({
+
+                    success: false,
+
+                    paid: false,
+
+                    message:
+                        "Payment currency could not be verified."
+
+                });
+
+            }
+
+
+            /* -------------------------
+               PAYMENT SUCCESSFUL
+            ------------------------- */
+
+            return res.json({
+
+                success: true,
+
+                paid: true,
+
+                status:
+                    transaction.status,
+
+                reference:
+                    transaction.reference,
+
+                amount:
+                    transaction.amount,
+
+                currency:
+                    transaction.currency,
+
+                customer: {
+
+                    email:
+                        transaction.customer?.email ||
+                        ""
+
+                },
+
+                metadata:
+                    transaction.metadata || {}
+
+            });
+
+        }
+
+
+        catch (error) {
+
+            console.error(
+                "Payment verification error:",
+                error
+            );
+
+
+            return res.status(500).json({
+
+                success: false,
+
+                paid: false,
+
+                message:
+                    "Unable to verify payment at this time."
+
+            });
+
+        }
+
+    }
+);
+
+
+/* =========================
    START SERVER
 ========================= */
 
